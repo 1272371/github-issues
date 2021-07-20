@@ -1,6 +1,7 @@
 # github-issues
 Bitcast Coding Assessment
 
+<<<<<<< HEAD
 
 Requirements
 The service must be implemented in Python, using the
@@ -21,3 +22,6 @@ Submissions should be in the form of a compressed archive as produced by
 The results should be sorted alphabetically without being case-sensitive. 
 
 In other words, be in the order 'A', 'a', 'B', 'b' ('a', 'A', 'b', 'B' would also be valid).
+=======
+just clone and install the requirements then you will be able to go
+>>>>>>> dee30f7ab276bd5b389163efa86f1b59084aeb56
