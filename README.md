@@ -21,3 +21,15 @@ Submissions should be in the form of a compressed archive as produced by
 The results should be sorted alphabetically without being case-sensitive. 
 
 In other words, be in the order 'A', 'a', 'B', 'b' ('a', 'A', 'b', 'B' would also be valid).
+
+
+git clone https://github.com/1272371/github-issues
+cd to github-issues/
+pip install -r requirments.txt
+cd to githubIssues/Scripts
+open the config.py file and paste your git access token(Which you would have done separately)
+python manage.py runserver #  to start the server locally
+python manage.py test #  to run test  locally
+
+open a new terminal and curl to your repo
+curl -H 'Accept: application/json' 'http://localhost:8000/issues/?repo=LibreTime/libretime'
