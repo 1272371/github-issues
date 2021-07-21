@@ -1,16 +1,39 @@
-from github import Github, RateLimitExceededException, BadCredentialsException, BadAttributeException, \
-    GithubException, UnknownObjectException, BadUserAgentException
-import pandas as pd
+from github import Github, RateLimitExceededException, BadCredentialsException
+from github import GithubException, UnknownObjectException
 import requests
 import time
 from datetime import datetime
-import config
+from Scripts import helper
 
 
-access_token = config.get_access_token()
+def from_project(access_token, project_full_name):
+    '''
+    input : access_token : str
+            project_fullname : str
+
+    Return : /{the issue number : title for the currently open issues/}
+    '''
+    found_issues = []
+    
+    try:
+
+        git = Github(access_token, per_page=100, retry=20)
+        repo = git.get_repo(project_full_name)
+        all_issues = repo.get_issues(state='open',
+                                     sort='created',
+                                     direction='asc')
+
+        if all_issues.totalCount == 0:
+            return found_issues
+        for issue in all_issues:
+            found_issues.append([issue.id, issue.title])
+
+    except Exception as e:
+        print(str(e))
+    return helper.json_format(helper.bubble_sort(found_issues))
 
 
-def extract_project_issues(project_full_name):
+def extract_project_issues(access_token, project_full_name):
     df_issues = pd.DataFrame()
     while True:
         try:
@@ -115,6 +138,8 @@ def extract_project_issues(project_full_name):
         break
     df_issues.to_csv('../Dataset/open_issues_1.csv', sep=',', encoding='utf-8', index=True)
 
-if __name__ == '__main__':
-    repo = 'PyGithub/PyGithub'
-    extract_project_issues(repo)
+    '''
+    if __name__ == '__main__':
+        repo = 'PyGithub/PyGithub'
+        extract_project_issues(repo)
+    '''

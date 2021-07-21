@@ -20,6 +20,7 @@ from issues import views
 
 urlpatterns = [
     url(r'^$', views.home, name='home'),
+    url(r'^issues/', views.issues, name='issues'),
     url(r'^admin/', admin.site.urls),
     #  path('admin/', admin.site.urls),
 ]
